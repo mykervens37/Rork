@@ -1,1 +1,336 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RORK | Premium Streetwear Club</title>
+    <style>
+        /* Couleurs inspirées du logo RORK */
+        :root {
+            --bg-dark: #05070f;
+            --bg-card: #0b0f19;
+            --blue-neon: #0088ff;
+            --blue-glow: #00bcff;
+            --blue-dark: #002244;
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Effet de lueur en arrière-plan */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--blue-neon);
+            filter: blur(150px);
+            opacity: 0.15;
+            top: -50px;
+            left: -50px;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid rgba(0, 136, 255, 0.15);
+            background: rgba(5, 7, 15, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 188, 255, 0.4);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--blue-glow);
+            text-shadow: 0 0 8px var(--blue-neon);
+        }
+
+        /* Section Héro */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--blue-glow);
+            filter: drop-shadow(0 0 5px rgba(0, 188, 255, 0.3));
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Le Concept : Le Tampon Membre Signature */
+        .stamp-badge {
+            background: linear-gradient(135deg, var(--blue-dark), #000);
+            border: 2px dashed var(--blue-glow);
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px rgba(0, 136, 255, 0.2);
+            transform: rotate(-2deg);
+        }
+
+        .stamp-icon {
+            font-size: 24px;
+        }
+
+        .stamp-text {
+            text-align: left;
+        }
+
+        .stamp-text h4 {
+            color: var(--blue-glow);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stamp-text p {
+            font-size: 12px;
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        .cta-btn {
+            background: linear-gradient(90deg, var(--blue-neon), var(--blue-glow));
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 136, 255, 0.4);
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--blue-glow);
+        }
+
+        /* Section Teaser Collection */
+        .preview-section {
+            padding: 80px 5%;
+            background-color: var(--bg-card);
+            border-top: 1px solid rgba(0, 136, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--blue-neon);
+            transform: translateY(-5px);
+        }
+
+        .product-img-placeholder {
+            height: 350px;
+            background: #121824;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .product-price {
+            color: var(--blue-glow);
+            font-weight: 700;
+        }
+
+        /* Petit tag sur le produit */
+        .member-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 136, 255, 0.2);
+            border: 1px solid var(--blue-neon);
+            color: var(--blue-glow);
+            backdrop-filter: blur(5px);
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="logo-container">
+            <!-- Remplace "image_HoJfBS.png" par le vrai chemin de ton image si besoin -->
+            <img src="image_HoJfBS.png" alt="RORK Logo" class="logo-img">
+            <span class="logo-text">RORK</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Accueil</a>
+            <a href="#">Produits</a>
+            <a href="#">Profil</a>
+            <a href="#">Communauté</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Le concept unique mis en avant par un badge style tampon -->
+        <div class="stamp-badge">
+            <span class="stamp-icon">🛡️</span>
+            <div class="stamp-text">
+                <h4>Tampon Membre Inclus</h4>
+                <p>1er achat = Membre à vie. Sans frais cachés.</p>
+            </div>
+        </div>
+
+        <h1>Premium <span>Streetwear</span></h1>
+        <p>Rejoins le club fermé RORK. Des pièces exclusives, une qualité lourde, conçues pour ceux qui dictent les règles.</p>
+        
+        <button class="cta-btn">Découvrir la collection</button>
+    </section>
+
+    <!-- Aperçu de la collection -->
+    <section class="preview-section">
+        <h2 class="section-title">Derniers Drops</h2>
+        
+        <div class="grid">
+            <!-- Produit 1 -->
+            <div class="product-card">
+                <div class="member-tag">+ Tampon Actif</div>
+                <div class="product-img-placeholder">R</div>
+                <div class="product-info">
+                    <div class="product-name">Cyber Hoodie V1</div>
+                    <div class="product-price">75 USD</div>
+                </div>
+            </div>
+
+            <!-- Produit 2 -->
+            <div class="product-card">
+                <div class="member-tag">+ Tampon Actif</div>
+                <div class="product-img-placeholder">R</div>
+                <div class="product-info">
+                    <div class="product-name">RORK Cargo Pants</div>
+                    <div class="product-price">90 USD</div>
+                </div>
+            </div>
+
+            <!-- Produit 3 -->
+            <div class="product-card">
+                <div class="member-tag">+ Tampon Actif</div>
+                <div class="product-img-placeholder">R</div>
+                <div class="product-info">
+                    <div class="product-name">Oversized Tee Neon</div>
+                    <div class="product-price">45 USD</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+
